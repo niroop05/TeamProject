@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1= pageHeader.title
+      br
+      small.text-muted.text-danger &nbsp;#{pageHeader.strapline}
+
+  .row
+    each location in locations
+      .col-12.col-md-8
+        .card
+          .card-block
+            h4 
+              a(href=`/location/${location.name}`) #{location.name}
+              small &nbsp;
+              // Display rating stars
+              each star in Array(location.rating)
+                i.fas.fa-star
+              each star in Array(5 - location.rating)
+                i.far.fa-star
+              span.badge.badge-pill.badge-default.float-right #{location.distance}
+            p.address #{location.address}
+            p.facilities
+              each product in location.products
+                span.badge.badge-warning #{product}
+
+  .col-12.col-md-4(style="position: fixed; bottom: 0;")
+    p.lead(style="white-space: nowrap;") Looking for groceries? Yeager Groceries is the best option to find what you need from your place.
